@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+            background: #1e1e1e;
+            color: white;
+            text-align: center;
+        }
+
+        .btn {
+            background: #00ffd5;
+            color: #000;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .status {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #00ffd5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logo">OMNIOS</div>
+    <p style="font-size: 0.9rem; color: #ccc;">Sync your selection 1:1 with OMNIOS</p>
+    <button class="btn" id="push">PUSH TO OMNIOS</button>
+    <div id="status" class="status">Ready</div>
+
+    <script>
+        document.getElementById('push').onclick = () => {
+            document.getElementById('status').innerText = 'Traversing layers...';
+            parent.postMessage({ pluginMessage: { type: 'push-to-omnios' } }, '*');
+        };
+
+        window.onmessage = async (event) => {
+            const msg = event.data.pluginMessage;
+            if (msg.type === 'payload-ready') {
+                document.getElementById('status').innerText = 'Sending to OMNIOS...';
+
+                try {
+                    const response = await fetch('http://localhost:3000/api/figma/push', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ project: msg.data })
+                    });
+
+                    if (response.ok) {
+                        document.getElementById('status').innerText = 'Success! Pushed to Editor.';
+                    } else {
+                        document.getElementById('status').innerText = 'Error: Editor not reachable.';
+                    }
+                } catch (e) {
+                    document.getElementById('status').innerText = 'Connection Refused (Is OMNIOS running?)';
+                }
+            }
+        };
+    </script>
+</body>
+
+</html>

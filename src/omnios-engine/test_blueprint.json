@@ -1,0 +1,78 @@
+{
+    "id": "bp_test_01",
+    "nodes": {
+        "node_1": {
+            "id": "node_1",
+            "type": "api_request",
+            "data": {
+                "label": "Start"
+            }
+        },
+        "node_2": {
+            "id": "node_2",
+            "type": "set_var",
+            "data": {
+                "varName": "status",
+                "value": "active"
+            }
+        },
+        "node_3": {
+            "id": "node_3",
+            "type": "condition",
+            "data": {
+                "left": "active",
+                "right": "active",
+                "operator": "=="
+            }
+        },
+        "node_4": {
+            "id": "node_4",
+            "type": "set_var",
+            "data": {
+                "varName": "result",
+                "value": "Success!"
+            }
+        },
+        "node_5": {
+            "id": "node_5",
+            "type": "set_var",
+            "data": {
+                "varName": "result",
+                "value": "Failure!"
+            }
+        }
+    },
+    "connections": [
+        {
+            "id": "c1",
+            "fromId": "node_1",
+            "toId": "node_2",
+            "port": null
+        },
+        {
+            "id": "c2",
+            "fromId": "node_2",
+            "toId": "node_3",
+            "port": null
+        },
+        {
+            "id": "c3",
+            "fromId": "node_3",
+            "toId": "node_4",
+            "port": "true"
+        },
+        {
+            "id": "c4",
+            "fromId": "node_3",
+            "toId": "node_5",
+            "port": "false"
+        },
+        {
+            "id": "c_default",
+            "fromId": "node_3",
+            "toId": "node_4",
+            "port": "default"
+        }
+    ],
+    "variables": {}
+}

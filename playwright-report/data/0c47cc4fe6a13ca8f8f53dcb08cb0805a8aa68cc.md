@@ -1,0 +1,388 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - button "Deploy" [ref=e9] [cursor=pointer]:
+          - img [ref=e10]
+          - text: Deploy
+        - generic [ref=e15]:
+          - img [ref=e16]
+          - generic [ref=e18]: OMNIOS OS
+      - generic [ref=e19]:
+        - button "Standard" [ref=e20] [cursor=pointer]
+        - button "HYPER" [ref=e22] [cursor=pointer]:
+          - img [ref=e23]
+          - text: HYPER
+      - generic [ref=e25]:
+        - generic "Working Offline" [ref=e26]:
+          - img [ref=e27]
+          - generic [ref=e31]: Offline
+        - generic "Design Intelligence" [ref=e32] [cursor=pointer]:
+          - img [ref=e33]
+          - generic [ref=e41]: Auto
+        - button "Forge" [ref=e44] [cursor=pointer]:
+          - img [ref=e45]
+          - generic [ref=e50]: Forge
+        - generic "Export to Code" [ref=e51] [cursor=pointer]:
+          - img [ref=e52]
+          - generic [ref=e55]: Export
+    - generic [ref=e56]:
+      - complementary [ref=e57]:
+        - generic [ref=e58]:
+          - generic [ref=e59]: OMNI-OS
+          - button "EXPORT" [ref=e60] [cursor=pointer]
+        - generic [ref=e61]:
+          - button "ADD" [ref=e62] [cursor=pointer]:
+            - img [ref=e64]
+            - generic [ref=e65]: ADD
+          - button "LAYERS" [ref=e66] [cursor=pointer]:
+            - img [ref=e68]
+            - generic [ref=e72]: LAYERS
+          - button "STYLES" [ref=e73] [cursor=pointer]:
+            - img [ref=e75]
+            - generic [ref=e77]: STYLES
+          - button "COMPS" [ref=e78] [cursor=pointer]:
+            - img [ref=e80]
+            - generic [ref=e84]: COMPS
+          - button "TOKENS" [ref=e85] [cursor=pointer]:
+            - img [ref=e87]
+            - generic [ref=e88]: TOKENS
+          - button "DATA" [ref=e89] [cursor=pointer]:
+            - img [ref=e91]
+            - generic [ref=e95]: DATA
+          - button "Market" [ref=e96] [cursor=pointer]:
+            - img [ref=e98]
+            - generic [ref=e101]: Market
+          - button "VARS" [ref=e102] [cursor=pointer]:
+            - img [ref=e104]
+            - generic [ref=e112]: VARS
+          - button "AI" [ref=e113] [cursor=pointer]:
+            - img [ref=e115]
+            - generic [ref=e118]: AI
+          - button "LANG" [ref=e119] [cursor=pointer]:
+            - img [ref=e121]
+            - generic [ref=e124]: LANG
+          - button "GIT" [ref=e125] [cursor=pointer]:
+            - img [ref=e127]
+            - generic [ref=e131]: GIT
+          - button "TRANS" [ref=e132] [cursor=pointer]:
+            - img [ref=e134]
+            - generic [ref=e138]: TRANS
+          - button "PKGS" [ref=e139] [cursor=pointer]:
+            - img [ref=e141]
+            - generic [ref=e145]: PKGS
+          - button "ASSETS" [ref=e146] [cursor=pointer]:
+            - img [ref=e148]
+            - generic [ref=e152]: ASSETS
+          - button "ANALYTICS" [ref=e153] [cursor=pointer]:
+            - img [ref=e155]
+            - generic [ref=e157]: ANALYTICS
+          - button "PLUGINS" [ref=e158] [cursor=pointer]:
+            - img [ref=e160]
+            - generic [ref=e162]: PLUGINS
+          - button "A11Y" [ref=e163] [cursor=pointer]:
+            - img [ref=e165]
+            - generic [ref=e168]: A11Y
+        - generic [ref=e170]:
+          - generic [ref=e171]:
+            - generic [ref=e172]:
+              - img [ref=e173]
+              - heading "AI Brain" [level=3] [ref=e176]
+            - button "AI Copilot" [ref=e178] [cursor=pointer]:
+              - img [ref=e180]
+              - generic [ref=e183]: AI Copilot
+          - generic [ref=e184]:
+            - generic [ref=e185]:
+              - img [ref=e186]
+              - heading "Hybrid Marketplace" [level=3] [ref=e189]
+            - generic [ref=e190]:
+              - button "Stripe Checkout" [ref=e191] [cursor=pointer]:
+                - img [ref=e193]
+                - generic [ref=e195]: Stripe Checkout
+              - button "3D Tilt Card (Webgl)" [ref=e196] [cursor=pointer]:
+                - img [ref=e198]
+                - generic [ref=e201]: 3D Tilt Card (Webgl)
+              - button "Parallax Hero" [ref=e202] [cursor=pointer]:
+                - img [ref=e204]
+                - generic [ref=e208]: Parallax Hero
+              - button "Infinite Marquee" [ref=e209] [cursor=pointer]:
+                - img [ref=e211]
+                - generic [ref=e214]: Infinite Marquee
+              - button "SEO Pulse" [ref=e215] [cursor=pointer]:
+                - img [ref=e217]
+                - generic [ref=e220]: SEO Pulse
+              - button "Liquid Reveal Img" [ref=e221] [cursor=pointer]:
+                - img [ref=e223]
+                - generic [ref=e226]: Liquid Reveal Img
+          - generic [ref=e227]:
+            - generic [ref=e228]:
+              - img [ref=e229]
+              - heading "Smart Presets" [level=3] [ref=e232]
+            - generic [ref=e233]:
+              - button "Center Hero Section" [ref=e234] [cursor=pointer]:
+                - img [ref=e236]
+                - generic [ref=e238]: Center Hero Section
+              - button "Standard Navbar" [ref=e239] [cursor=pointer]:
+                - img [ref=e241]
+                - generic [ref=e243]: Standard Navbar
+              - button "Feature Grid" [ref=e244] [cursor=pointer]:
+                - img [ref=e246]
+                - generic [ref=e248]: Feature Grid
+          - generic [ref=e249]:
+            - generic [ref=e250]:
+              - img [ref=e251]
+              - heading "Authentication" [level=3] [ref=e254]
+            - generic [ref=e255]:
+              - button "Login Form" [ref=e256] [cursor=pointer]:
+                - img [ref=e258]
+                - generic [ref=e261]: Login Form
+              - button "Signup Form" [ref=e262] [cursor=pointer]:
+                - img [ref=e264]
+                - generic [ref=e265]: Signup Form
+              - button "Logout Button" [ref=e266] [cursor=pointer]:
+                - img [ref=e268]
+                - generic [ref=e271]: Logout Button
+          - generic [ref=e272]:
+            - generic [ref=e273]:
+              - img [ref=e274]
+              - heading "Extended Presence" [level=3] [ref=e277]
+            - generic [ref=e278]:
+              - button "Import from OMNIOS Inspector" [ref=e279] [cursor=pointer]:
+                - img [ref=e281]
+                - generic [ref=e284]: Import from OMNIOS Inspector
+              - button "Sync from Figma" [ref=e285] [cursor=pointer]:
+                - img [ref=e287]
+                - generic [ref=e289]: Sync from Figma
+              - button "Hooks" [ref=e290] [cursor=pointer]:
+                - img [ref=e292]
+                - generic [ref=e298]: Hooks
+          - generic [ref=e299]:
+            - heading "Structure" [level=3] [ref=e301]
+            - generic [ref=e302]:
+              - button "Section" [ref=e303] [cursor=pointer]:
+                - img [ref=e305]
+                - generic [ref=e307]: Section
+              - button "Container" [ref=e308] [cursor=pointer]:
+                - img [ref=e310]
+                - generic [ref=e313]: Container
+              - button "Grid" [ref=e314] [cursor=pointer]:
+                - img [ref=e316]
+                - generic [ref=e318]: Grid
+              - button "Columns" [ref=e319] [cursor=pointer]:
+                - img [ref=e321]
+                - generic [ref=e323]: Columns
+          - generic [ref=e324]:
+            - heading "Basic" [level=3] [ref=e326]
+            - generic [ref=e327]:
+              - button "Div" [ref=e328] [cursor=pointer]:
+                - img [ref=e330]
+                - generic [ref=e332]: Div
+              - button "Button" [ref=e333] [cursor=pointer]:
+                - img [ref=e335]
+                - generic [ref=e337]: Button
+              - button "List" [ref=e338] [cursor=pointer]:
+                - img [ref=e340]
+                - generic [ref=e341]: List
+              - button "Line" [ref=e342] [cursor=pointer]:
+                - img [ref=e344]
+                - generic [ref=e346]: Line
+              - button "Spacer" [ref=e347] [cursor=pointer]:
+                - img [ref=e349]
+                - generic [ref=e353]: Spacer
+              - button "Slot" [ref=e354] [cursor=pointer]:
+                - img [ref=e356]
+                - generic [ref=e359]: Slot
+              - button "Pen Tool" [ref=e360] [cursor=pointer]:
+                - img [ref=e362]
+                - generic [ref=e367]: Pen Tool
+          - generic [ref=e368]:
+            - heading "Typography" [level=3] [ref=e370]
+            - generic [ref=e371]:
+              - button "Heading" [ref=e372] [cursor=pointer]:
+                - img [ref=e374]
+                - generic [ref=e376]: Heading
+              - button "Paragraph" [ref=e377] [cursor=pointer]:
+                - img [ref=e379]
+                - generic [ref=e381]: Paragraph
+              - button "Label" [ref=e382] [cursor=pointer]:
+                - img [ref=e384]
+                - generic [ref=e386]: Label
+              - button "Link" [ref=e387] [cursor=pointer]:
+                - img [ref=e389]
+                - generic [ref=e391]: Link
+          - generic [ref=e392]:
+            - heading "Media" [level=3] [ref=e394]
+            - generic [ref=e395]:
+              - button "Image" [ref=e396] [cursor=pointer]:
+                - img [ref=e398]
+                - generic [ref=e402]: Image
+              - button "Video" [ref=e403] [cursor=pointer]:
+                - img [ref=e405]
+                - generic [ref=e408]: Video
+              - button "Embed" [ref=e409] [cursor=pointer]:
+                - img [ref=e411]
+                - generic [ref=e415]: Embed
+              - button "Lottie" [ref=e416] [cursor=pointer]:
+                - img [ref=e418]
+                - generic [ref=e421]: Lottie
+          - generic [ref=e422]:
+            - heading "Commerce" [level=3] [ref=e424]
+            - generic [ref=e425]:
+              - button "Pay Button" [ref=e426] [cursor=pointer]:
+                - img [ref=e428]
+                - generic [ref=e430]: Pay Button
+              - button "Product Grid" [ref=e431] [cursor=pointer]:
+                - img [ref=e433]
+                - generic [ref=e434]: Product Grid
+              - button "Cart Toggle" [ref=e435] [cursor=pointer]:
+                - img [ref=e437]
+                - generic [ref=e440]: Cart Toggle
+          - generic [ref=e441]:
+            - heading "Forms" [level=3] [ref=e443]
+            - generic [ref=e444]:
+              - button "Input" [ref=e445] [cursor=pointer]:
+                - img [ref=e447]
+                - generic [ref=e452]: Input
+              - button "Area" [ref=e453] [cursor=pointer]:
+                - img [ref=e455]
+                - generic [ref=e460]: Area
+              - button "Check" [ref=e461] [cursor=pointer]:
+                - img [ref=e463]
+                - generic [ref=e466]: Check
+              - button "Select" [ref=e467] [cursor=pointer]:
+                - img [ref=e469]
+                - generic [ref=e471]: Select
+          - generic [ref=e472]:
+            - heading "Advanced" [level=3] [ref=e474]
+            - generic [ref=e475]:
+              - button "Repeater" [ref=e476] [cursor=pointer]:
+                - img [ref=e478]
+                - generic [ref=e479]: Repeater
+              - button "Navbar" [ref=e480] [cursor=pointer]:
+                - img [ref=e482]
+                - generic [ref=e484]: Navbar
+              - button "Accordion" [ref=e485] [cursor=pointer]:
+                - img [ref=e487]
+                - generic [ref=e488]: Accordion
+              - button "Feature Grid" [ref=e489] [cursor=pointer]:
+                - img [ref=e491]
+                - generic [ref=e493]: Feature Grid
+          - generic [ref=e494]:
+            - heading "Bridge Elements" [level=3] [ref=e496]
+            - button "Auth Wall" [ref=e498] [cursor=pointer]:
+              - img [ref=e500]
+              - generic [ref=e503]: Auth Wall
+          - generic [ref=e504]:
+            - heading "Developer" [level=3] [ref=e506]
+            - button "Custom Code" [ref=e508] [cursor=pointer]:
+              - img [ref=e510]
+              - generic [ref=e514]: Custom Code
+          - generic [ref=e515]:
+            - heading "Magic AI" [level=3] [ref=e516]:
+              - img [ref=e517]
+              - text: Magic AI
+            - button "Generate Section ✨" [ref=e520] [cursor=pointer]
+      - generic [ref=e521]:
+        - generic [ref=e522]:
+          - generic [ref=e523]:
+            - button "↩️" [disabled] [ref=e524]
+            - button "↪️" [disabled] [ref=e525]
+          - generic [ref=e526]:
+            - button "Design" [ref=e527] [cursor=pointer]:
+              - img [ref=e528]
+              - text: Design
+            - button "Logic" [ref=e530] [cursor=pointer]:
+              - img [ref=e531]
+              - text: Logic
+          - generic [ref=e535]:
+            - button "Constructor" [ref=e536] [cursor=pointer]:
+              - img [ref=e537]
+              - text: Constructor
+            - button "Publisher" [ref=e540] [cursor=pointer]:
+              - img [ref=e541]
+              - text: Publisher
+            - button "Architect" [ref=e546] [cursor=pointer]:
+              - img [ref=e547]
+              - text: Architect
+          - generic [ref=e549]:
+            - button "Preview Mode" [ref=e550] [cursor=pointer]:
+              - img [ref=e551]
+            - button "Design System (Tokens)" [ref=e556] [cursor=pointer]:
+              - img [ref=e557]
+            - button "Comment Tool (C)" [ref=e563] [cursor=pointer]:
+              - img [ref=e564]
+              - img [ref=e566]
+            - generic [ref=e571]: OFFLINE
+            - button "LIVE" [ref=e572] [cursor=pointer]:
+              - img [ref=e573]
+              - generic [ref=e578]: LIVE
+            - button "Mobile Native Preview" [ref=e579] [cursor=pointer]:
+              - img [ref=e580]
+            - link "Open Mobile Companion" [ref=e582] [cursor=pointer]:
+              - /url: /mobile
+              - img [ref=e583]
+            - button "Enable Static Mode" [ref=e585] [cursor=pointer]:
+              - img [ref=e586]
+            - generic [ref=e589]:
+              - button "Light Mode" [ref=e590] [cursor=pointer]:
+                - img [ref=e591]
+              - button "Dark Mode" [ref=e597] [cursor=pointer]:
+                - img [ref=e598]
+            - generic [ref=e601]:
+              - generic [ref=e602]:
+                - button "Desktop" [ref=e603] [cursor=pointer]:
+                  - img [ref=e604]
+                  - generic [ref=e606]: Desktop
+                - img [ref=e607]
+                - button "Tablet (768px)" [ref=e609] [cursor=pointer]:
+                  - img [ref=e610]
+                - img [ref=e612]
+                - button "Mobile (375px)" [ref=e614] [cursor=pointer]:
+                  - img [ref=e615]
+              - generic [ref=e618]: Cascade Flow
+            - generic [ref=e619]:
+              - generic [ref=e620]: 100%
+              - button "↺" [ref=e621] [cursor=pointer]
+            - button "Publish" [ref=e622] [cursor=pointer]
+            - button "List in Market" [ref=e623] [cursor=pointer]:
+              - img [ref=e624]
+              - text: List in Market
+            - button "Secrets" [ref=e627] [cursor=pointer]:
+              - img [ref=e628]
+              - text: Secrets
+            - button "Console" [ref=e631] [cursor=pointer]:
+              - img [ref=e632]
+              - text: Console
+            - button "Export PWA (Manifest)" [ref=e634] [cursor=pointer]:
+              - img [ref=e635]
+            - button "Version History" [ref=e641] [cursor=pointer]:
+              - img [ref=e642]
+          - button "HOME" [ref=e647] [cursor=pointer]
+        - main [ref=e648]:
+          - generic [ref=e656]:
+            - heading "Hyper-Engine Status" [level=3] [ref=e657]
+            - generic [ref=e658]: WASM Module Loaded
+            - button "Run Taffy Benchmark (5k Nodes)" [ref=e660] [cursor=pointer]
+      - generic [ref=e661]:
+        - generic [ref=e662]: 👆
+        - paragraph [ref=e663]: Select an element to edit
+        - paragraph [ref=e664]: Click any item on the canvas
+      - generic [ref=e668]: NAVIGATOR
+      - button "Viewing As Guest (Public)" [ref=e671] [cursor=pointer]:
+        - generic [ref=e673]:
+          - generic [ref=e674]: Viewing As
+          - generic [ref=e675]: Guest (Public)
+        - img [ref=e676]
+      - generic [ref=e678]:
+        - heading "VQA Parity Lab INTERNAL" [level=3] [ref=e679]:
+          - generic [ref=e680]: VQA Parity Lab
+          - generic [ref=e681]: INTERNAL
+        - generic [ref=e682]: Verifies that the Rust Hyper Engine render matches the Browser DOM exactly.
+        - button "Run Parity Check" [ref=e683] [cursor=pointer]
+  - button "Open Next.js Dev Tools" [ref=e689] [cursor=pointer]:
+    - img [ref=e690]
+  - alert [ref=e693]
+```

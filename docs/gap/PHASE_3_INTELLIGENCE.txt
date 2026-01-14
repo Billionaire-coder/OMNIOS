@@ -1,0 +1,137 @@
+OMNIOS GAP REMEDIATION - PHASE 3: INTELLIGENCE & CORE ENGINE
+============================================================
+
+OBJECTIVE
+---------
+This phase focuses on replacing the "Mock AI" and "Proxy Physics" with actual, high-performance engines. This is where the product differentiation ("Hyper" engine) becomes reality.
+
+ESTIMATED EFFORT: 200 - 250 Hours
+
+BATCH 3.1: REAL AI INTEGRATION (THE "BRAIN")
+--------------------------------------------
+
+### 3.1.1. LLM Integration Infrastructure
+**Current Status:** "Simple keyword matching ('red', 'blue')... No actual LLM integration".
+**Target Implementation:**
+- [ ] Setup accounts/keys for OpenAI (GPT-4o) and Anthropic (Claude 3.5 Sonnet).
+- [ ] Build `AIRequestLayer`:
+    - [ ] Rate limiting (per user).
+    - [ ] Token usage tracking (cost analysis).
+    - [ ] Streaming response support (for typing effect).
+- [ ] **Prompt Engineering**: Develop system prompts that understand OMNIOS JSON structure.
+
+### 3.1.2. Context Engine
+**Current Status:** "No context awareness".
+**Target Implementation:**
+- [ ] Build `ContextGatherer`: Function to serialize current Project State into a token-optimized JSON/text representation.
+- [ ] Implement "Vision" support: Send screenshots of current canvas (if multimodal) or bounding box descriptions to the AI so it "sees" the design.
+- [ ] RAG System: Index user's design history/style guide to provide relevant suggestions.
+
+### 3.1.3. Generative Actions
+**Current Status:** "Only 3 hardcoded templates".
+**Target Implementation:**
+- [ ] Develop `ActionInterpreter`: AI output -> OMNIOS Command (e.g., `CREATE_RECT`, `APPLY_STYLE`).
+- [ ] Replace `mockGenerator.ts` with real generation:
+    - [ ] User: "Make a dark mode pricing page."
+    - [ ] AI: Generates full component tree structure.
+- [ ] Auto-Tagging: AI analyzes elements and assigns semantic names/tags.
+
+BATCH 3.2: NEURAL ENGINE UPGRADE
+--------------------------------
+
+### 3.2.1. From HashMap to Tensor
+**Current Status:** "Mock TensorFlow Lite... HashMap for weights".
+**Target Implementation:**
+- [ ] **Decision Point**: Do we need real deep learning in client?
+    - If YES: Integrate `onnxruntime-web` or `tfjs`.
+    - If NO (but better than HashMap): Implement actual Logistic Regression or Gradient Boosting.
+- [ ] Implement `FeatureExtractor`:
+    - Track mouse velocity, dwell time, click paths.
+    - Normalize real-time inputs.
+- [ ] Implement "Intention Prediction": Predict which element the user is trying to select before they click.
+
+BATCH 3.3: PHYSICS & INTERACTION ENGINE
+---------------------------------------
+
+### 3.3.1. Advanced Physics (Rapier2D)
+**Current Status:** "Simple Euler integration... Basic collision".
+**Target Implementation:**
+- [ ] Rip out current `RigidBodyPlugin`.
+- [ ] Integrate `@dimforge/rapier2d` (WASM based) for high performance.
+- [ ] Implement features:
+    - [ ] Accurate collisions (polygons/convex hulls).
+    - [ ] Joints/Constraints (connect elements with springs/hinges).
+    - [ ] Forces/Impulses (Throw elements).
+- [ ] `PhysicsDebugger`: Visual overlay of physics bodies.
+
+### 3.3.2. Spatial Optimization (The "Speed" Fix)
+**Current Status:** "O(N) Algorithm... Iterates through all elements".
+**Target Implementation:**
+- [ ] Implement **RBush** or **Quadtree** spatial index.
+- [ ] Refactor `find_snap_targets`:
+    - Previous: Loop 1000 elements = 1000 checks.
+    - New: Query Quadtree window = 10 checks.
+- [ ] Implement "View Culling": Don't render/calc physics for off-screen elements.
+
+BATCH 3.4: LAYOUT ENGINE 2.0
+----------------------------
+
+### 3.4.1. Taffy Upgrade & Grid
+**Current Status:** "Limited by Taffy 0.3... No full CSS Grid".
+**Target Implementation:**
+- [ ] Upgrade `tauri-plugin-taffy` to latest version.
+- [ ] Implement CSS Grid support in the OMNIOS schema.
+- [ ] Build `GridEditor` UI (Drag lines to create tracks).
+- [ ] Implement Subgrid if supported.
+
+### 3.4.2. Container Queries
+**Current Status:** "Limited responsive breakpoint handling".
+**Target Implementation:**
+- [ ] Implement `ResizeObserver` based container query logic.
+- [ ] Allow components to style themselves based on *parent size*, not just window size.
+
+BATCH 3.5: NATIVE CAPABILITIES
+------------------------------
+
+### 3.5.1. The Tauri Bridge
+**Current Status:** "Tauri... returns null in browser".
+**Target Implementation:**
+- [ ] **Native FS Adapter**: Abstract file system access (works in Browser via OPFS, works in Desktop via Tauri FS).
+- [ ] **System Tray**: Implement native menu for "Quick Capture".
+- [ ] **Native Dialogs**: Replace HTML prompts with OS-level Open/Save dialogs when in Tauri.
+
+BATCH 3.6: POLISHED INTERACTION
+-------------------------------
+
+### 3.6.1. Animation Engine
+**Current Status:** "Fixed spring parameters... No easing functions".
+**Target Implementation:**
+- [ ] Implement `SpringConfigurator`: Allow per-element stiffness/damping.
+- [ ] Integrate `popmotion` or `framer-motion` logic into the Rust core.
+- [ ] Implement "Layout Projections": Smoothly animate elements when their position changes due to layout updates.
+
+### 3.6.2. Inverse Compiler (Code-to-Design)
+**Current Status:** "Basic parsing... Doesn't handle all JSX".
+**Target Implementation:**
+- [ ] Implement `AST-to-Node` parser using `swc` or `babel` logic.
+- [ ] Support "lossy" import detection (warn user if code cannot be visualized).
+- [ ] Implement "Code Preservation": If user edits code manually, don't overwrite it on next drag-drop.
+
+BATCH 3.7: LOGIC KERNEL (HEADLESS FLOW)
+---------------------------------------
+
+### 3.7.1. The Rust Runtime
+**Current Status:** "Simple execution simulation... Returns hardcoded JSON".
+**Target Implementation:**
+- [ ] Implement `FlowExecutor` in Rust:
+    - [ ] `GraphTraversal`: BFS/DFS execution of blueprint nodes.
+    - [ ] `VariableMemory`: Stack/Heap for flow variables.
+- [ ] Port `state_hydration` logic to Rust (Server Runtime).
+- [ ] Implement WASM Interface for executing logic in the browser (client-side preview).
+
+DELIVERABLES FOR PHASE 3
+------------------------
+1. "Copilot" that actually understands language and manipulates the design.
+2. Physics engine that handles 1000+ elements at 60fps.
+3. Snapping/Interaction that remains instant at scale (Spatial Index).
+4. Layout engine supporting modern CSS (Grid, Container Queries).

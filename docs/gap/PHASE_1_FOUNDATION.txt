@@ -1,0 +1,143 @@
+OMNIOS GAP REMEDIATION - PHASE 1: FOUNDATION & VITAL SIGNS
+==========================================================
+
+OBJECTIVE
+---------
+This phase focuses on replacing "mock" security and infrastructure with production-grade implementations. The goal is to ensure the application is secure, stable, and authenticated before adding advanced features. 
+
+ESTIMATED EFFORT: 200 - 300 Hours
+
+BATCH 1.1: SECURITY HARDENING (THE "NON-NEGOCIABLES")
+-----------------------------------------------------
+
+### 1.1.1. Secrets Management System
+**Current Status:** Secrets likely stored in plain text or simple checks.
+**Target Implementation:**
+- [ ] Implement `SecretsManager` using Node.js `crypto` module (AES-256-GCM).
+- [ ] Create a secure key storage strategy (environment variables for master keys).
+- [ ] Implement `rotate_secret()` functionality.
+- [ ] Audit all current hardcoded "sk_test..." strings and move them to `.env`.
+- [ ] Implement strict environment variable validation on startup (fail fast if missing).
+
+### 1.1.2. Input Sanitization & Validation Layer
+**Current Status:** "Limited input sanitization".
+**Target Implementation:**
+- [ ] Install and configure `DOMPurify` for all user-generated content rendering.
+- [ ] Implement `zod` schemas for ALL API routes requests.
+- [ ] automated middleware to validate request bodies against schemas.
+- [ ] Audit SQL queries (even with PGlite) to ensure parameterized usage.
+- [ ] Implement Content Security Policy (CSP) headers in Next.js config.
+
+### 1.1.3. Threat Mitigation
+**Current Status:** No XSS/CSRF protection mentioned.
+**Target Implementation:**
+- [ ] Implement CSRF token verification for mutation endpoints.
+- [ ] Configure `helmet` or Next.js headers for X-Frame-Options, X-Content-Type-Options.
+- [ ] Implement rate limiting middleware (using Redis or in-memory map with GC) for API routes.
+- [ ] Add request size limits to prevent DoS via large payloads.
+
+BATCH 1.2: AUTHENTICATION INFRASTRUCTURE
+----------------------------------------
+
+### 1.2.1. Core Identity Implementation
+**Current Status:** Mock OAuth simulation.
+**Target Implementation:**
+- [ ] Integrate **NextAuth.js (Auth.js)** v5.
+- [ ] Implement real OAuth providers:
+    - [ ] GitHub
+    - [ ] Google
+    - [ ] GitLab
+- [ ] Implement Email/Passwordless login (Magic Links).
+- [ ] Create `users` table in database (Schema definition required).
+- [ ] Implement Session management (Database sessions preferred over JWT for revocability).
+
+### 1.2.2. Authorization & RBAC
+**Current Status:** "RBAC types defined but implementation unclear".
+**Target Implementation:**
+- [ ] Design RBAC Schema: `SuperAdmin`, `Admin`, `Editor`, `Viewer`.
+- [ ] Implement Higher-Order Components (HOC) or Hooks (`usePermission`) for frontend gates.
+- [ ] Implement middleware-level permission checks for API routes.
+- [ ] Audit usage: Ensure no admin API can be called by non-admin users.
+
+### 1.2.3. Audit Logging
+**Current Status:** "No audit logging".
+**Target Implementation:**
+- [ ] Create `audit_logs` table.
+- [ ] Implement `logAction(userId, action, resource, metadata)`.
+- [ ] Hook `logAction` into all critical mutations (delete project, change billing, invite user).
+- [ ] Create simple Admin view to inspect audit logs.
+
+BATCH 1.3: ERROR HANDLING & RESILIENCE
+--------------------------------------
+
+### 1.3.1. React Error Boundaries
+**Current Status:** "No React Error Boundaries... errors can crash entire editor".
+**Target Implementation:**
+- [ ] Create `GlobalErrorBoundary` for the root app.
+- [ ] Create `EditorErrorBoundary` for the canvas specifically (so a component crash doesn't kill the sidebar).
+- [ ] Create `WidgetErrorBoundary` for individual plugin widgets.
+- [ ] Design "Aw Snap" fallback UI components.
+- [ ] Implement "Retry" functionality in boundaries.
+
+### 1.3.2. Structured Error Reporting
+**Current Status:** `console.error` only.
+**Target Implementation:**
+- [ ] Create `AppError` class extending `Error` with HTTP status codes and operational flags.
+- [ ] Implement a centralized Error Handling Service.
+- [ ] Integrate **Sentry** or **LogRocket** for frontend error tracking.
+- [ ] Standardize API error responses (`{ error: string, code: string, requestId: string }`).
+
+### 1.3.3. Recovery Loops
+**Current Status:** "No retry logic".
+**Target Implementation:**
+- [ ] Implement `withRetry` utility for all async operations (network calls).
+- [ ] Add exponential backoff to critical services (Billing, Saving).
+- [ ] Implement "Safe Mode" for the editor (loads without plugins/custom scripts if crash loop detected).
+
+BATCH 1.4: CODE QUALITY & TYPE SAFETY
+-------------------------------------
+
+### 1.4.1. TypeScript Strictness
+**Current Status:** "Some `any` types... No strict TypeScript mode".
+**Target Implementation:**
+- [ ] Enable `strict: true` in `tsconfig.json`.
+- [ ] Run `tsc` and fix all resulting errors (likely 500+).
+- [ ] Replace `any` with `unknown` or specific interfaces in `src/omnios-engine`.
+- [ ] Define comprehensive Zod schemas that infer TypeScript types to ensure runtime/compile-time parity.
+
+### 1.4.2. Testing Foundation (Unit)
+**Current Status:** "Very few unit tests".
+**Target Implementation:**
+- [ ] Configure **Vitest** (faster than Jest).
+- [ ] Write tests for `BillingService` (mocking Stripe properly).
+- [ ] Write tests for `SecretsManager`.
+- [ ] Write tests for `RBAC` logic.
+- [ ] Target: 80% coverage on `src/lib`.
+
+BATCH 1.5: PLUGIN SANDBOXING & SECURITY
+---------------------------------------
+
+### 1.5.1. Secure Execution Environment
+**Current Status:** "No real sandboxing... Plugins can access full context".
+**Target Implementation:**
+- [ ] Implement `Iframe` or `WebWorker` based isolation for all user plugins.
+- [ ] Create `PluginPermission` system (e.g., plugin must ask "Can I read your selection?").
+- [ ] Implement `postMessage` RPC bridge for controlled plugin API access.
+- [ ] Block generic DOM access (plugins cannot `document.cookie`).
+
+BATCH 1.6: ARCHITECTURAL HYGIENE
+--------------------------------
+
+### 1.6.1. Code Deduplication
+**Current Status:** "Code Duplication... No shared utilities".
+**Target Implementation:**
+- [ ] Audit `src/utils` and `src/lib` for duplicate helper functions.
+- [ ] Create `omnios-ui-primitives` local package for shared UI components.
+- [ ] Refactor repeated patterns (e.g., API calling logic) into custom hooks (`useAPI`).
+
+DELIVERABLES FOR PHASE 1
+------------------------
+1. A secure application that can actually log users in via real providers.
+2. A database schema that persists users and sessions.
+3. An application that doesn't white-screen when a component fails.
+4. A codebase that passes `strict` TypeScript checks.

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            width: 250px;
+            padding: 15px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #1a1a1a;
+            color: white;
+            margin: 0;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .logo {
+            width: 24px;
+            height: 24px;
+            background: #00ffd5;
+            border-radius: 4px;
+        }
+        h2 {
+            margin: 0;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #00ffd5;
+            color: black;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .status {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo"></div>
+        <h2>OMNIOS Inspector</h2>
+    </div>
+    <button id="importBtn" class="btn">Import to OMNIOS</button>
+    <div id="status" class="status">Ready to capture site</div>
+    <script src="popup.js"></script>
+</body>
+</html>

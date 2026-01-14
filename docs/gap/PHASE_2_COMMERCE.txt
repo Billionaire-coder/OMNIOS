@@ -1,0 +1,150 @@
+OMNIOS GAP REMEDIATION - PHASE 2: COMMERCE & PERSISTENCE
+==========================================================
+
+OBJECTIVE
+---------
+This phase transforms the application from a "local tool" into a "SaaS platform". It enables data persistence across sessions/devices and implements the ability to capture revenue.
+
+ESTIMATED EFFORT: 150 - 200 Hours
+
+BATCH 2.1: DATA PERSISTENCE LAYER
+---------------------------------
+
+### 2.1.1. Database Migration (The "Real" DB)
+**Current Status:** "Browser-only database (PGlite)... Data lost on server restart".
+**Target Implementation:**
+- [ ] Provision managed PostgreSQL (Supabase, Neon, or AWS RDS).
+- [ ] Design Core Schema:
+    - [ ] `projects` (id, owner_id, machine_state_json, created_at, updated_at)
+    - [ ] `assets` (id, project_id, url, user_id)
+    - [ ] `snapshots` (id, project_id, diff_delta)
+- [ ] Setup Prisma or Drizzle ORM.
+- [ ] Implement Database Migration pipeline (CI/CD integration).
+
+### 2.1.2. Hybrid Sync Strategy
+**Current Status:** PGlite (local).
+**Target Implementation:**
+- [ ] Implement "Offline-First" architecture.
+- [ ] Keep PGlite for rapid local operations.
+- [ ] Implement `SyncEngine`:
+    - [ ] Queue mutations locally.
+    - [ ] Sync to Server DB when online.
+    - [ ] Handle conflict resolution (Last-Write-Wins initially, then CRDTs later).
+- [ ] Implement `SaveStatus` indicator in UI (Saved, Saving, Offline, Error).
+
+BATCH 2.2: STRIPE & BILLING (REVENUE ENGINE)
+--------------------------------------------
+
+### 2.2.1. Real Stripe Integration
+**Current Status:** "Stripe API key is hardcoded mock... No real API calls".
+**Target Implementation:**
+- [ ] Install `stripe` Node.js SDK.
+- [ ] Replace `BillingService` mocks with real calls:
+    - [ ] `createCustomer`
+    - [ ] `createSubscription`
+    - [ ] `cancelSubscription`
+    - [ ] `reportUsage` (for meter-based billing).
+- [ ] Implement Stripe Elements in Frontend for secure card handling.
+- [ ] Remove all hardcoded "sk_test" keys.
+
+### 2.2.2. Webhook Handling
+**Current Status:** "No webhook handling".
+**Target Implementation:**
+- [ ] Create `/api/webhooks/stripe` endpoint.
+- [ ] Middleware to verify Stripe signatures (Security critical).
+- [ ] Handle events:
+    - [ ] `invoice.payment_succeeded`: Provision access/credits.
+    - [ ] `invoice.payment_failed`: Downgrade user/send email.
+    - [ ] `customer.subscription.deleted`: Remove access.
+- [ ] Make webhook handling idempotent (process event by ID check).
+
+### 2.2.3. Stripe Connect (Marketplace Payouts)
+**Current Status:** "Returns fake checkout session URLs".
+**Target Implementation:**
+- [ ] Implement Stripe Connect Onboarding flow (Standard/Express).
+- [ ] Store `stripe_account_id` for plugin authors.
+- [ ] Implement `destination_charges` for marketplace splits (Platform fee vs Author share).
+- [ ] Dashboard for Authors to see earnings (via Stripe Dashboard link).
+
+BATCH 2.3: MARKETPLACE BACKEND
+------------------------------
+
+### 2.3.1. Registry Service
+**Current Status:** "All data in MOCK_REGISTRY array".
+**Target Implementation:**
+- [ ] Create `marketplace_items` table (id, author_id, price, version, manifest_json).
+- [ ] Implement API:
+    - [ ] `GET /marketplace/search`: With filters and text search.
+    - [ ] `POST /marketplace/publish`: With validation.
+- [ ] Implement File Storage (S3/R2) for plugin bundles/assets.
+
+### 2.3.2. Version Control for Plugins
+**Current Status:** "No version management".
+**Target Implementation:**
+- [ ] Schema: `marketplace_item_versions` (item_id, version_semver, changelog, bundle_url).
+- [ ] UI: "Update Available" badge for installed plugins.
+- [ ] CLI Tool for authors to publish updates (`omnios publish`).
+
+### 2.3.3. Reviews & Ratings
+**Current Status:** "No rating system backend".
+**Target Implementation:**
+- [ ] Schema: `marketplace_reviews` (item_id, user_id, rating, comment).
+- [ ] Logic: Only allow review if user has "purchased/installed" the item.
+- [ ] Aggregate: Pre-calculate average rating on the item record.
+
+BATCH 2.4: WEBHOOK & EVENT SYSTEM
+---------------------------------
+
+### 2.4.1. Persistent Webhook Store
+**Current Status:** "Uses in-memory Map... Data lost on server restart".
+**Target Implementation:**
+- [ ] Schema: `webhooks_config` (id, user_id, target_url, events_subscribed).
+- [ ] Schema: `webhook_delivery_attempts` (id, event_id, status, response_code).
+- [ ] Migrate `WebhookService` to use the database.
+
+### 2.4.2. Delivery Engine
+**Target Implementation:**
+- [ ] Implement a Job Queue (BullMQ or similar) for async delivery. Do not await webhooks in the main request thread.
+- [ ] Implement Retry Logic (Exponential backoff: 1s, 5s, 1m, 1h).
+- [ ] "Dead Letter Queue" for permanently failed hooks.
+
+BATCH 2.5: REAL-TIME COLLABORATION
+----------------------------------
+
+### 2.5.1. WebSocket Authority
+**Current Status:** "Simple WebSocket server... No room management".
+**Target Implementation:**
+- [ ] Implement `PartyKit` or `Hocuspocus` (Y.js backend) for scalable WebSockets.
+- [ ] Implement Room Authentication (User must belong to Project).
+- [ ] Implement Presence (Cursor awareness, "User is typing").
+- [ ] Implement "Smart Throttle": Only broadcast cursors at 30fps, not 144fps.
+
+BATCH 2.6: OFFLINE & CACHING STRATEGY
+-------------------------------------
+
+### 2.6.1. Service Worker & Storage
+**Current Status:** "No service worker... No offline support".
+**Target Implementation:**
+- [ ] Implement Service Worker (`next-pwa` or custom `sw.js`).
+- [ ] Cache static assets (fonts, icons, WASM blobs) cache-first.
+- [ ] Implement `IndexedDB` wrapper (`idb-keyval`) for storing Project State > 5MB.
+- [ ] Implement "Sync Queue" in IndexedDB for offline mutations.
+
+BATCH 2.7: ASSET PIPELINE
+-------------------------
+
+### 2.7.1. Large File Handling
+**Current Status:** "No chunked upload... No resumable uploads".
+**Target Implementation:**
+- [ ] Implement `TUS` protocol or AWS S3 Multipart Upload.
+- [ ] Client-side chunking for files > 10MB.
+- [ ] Progress bar UI with "Pause/Resume" controls.
+- [ ] Asset Optimization: Server-side Lambda to resize/compress images on upload.
+
+DELIVERABLES FOR PHASE 2
+------------------------
+1. Users can sign up and their data persists forever.
+2. Users can pay with real credit cards.
+3. Automated handling of subscriptions and expirations.
+4. A functional Marketplace where users can publish and buy plugins.
+5. Revenue split logic for the platform.

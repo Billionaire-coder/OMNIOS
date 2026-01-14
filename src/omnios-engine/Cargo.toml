@@ -1,0 +1,35 @@
+[package]
+name = "omnios-engine"
+version = "0.1.0"
+authors = ["OMNIOS Team"]
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = ["browser"]
+browser = ["dep:web-sys", "dep:console_error_panic_hook"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+console_error_panic_hook = { version = "0.1.7", optional = true }
+taffy = "0.3"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde-wasm-bindgen = "0.6"
+lazy_static = "1.4"
+yrs = "0.18"
+image = { version = "0.24", default-features = false, features = ["jpeg", "png", "webp"] }
+fast_image_resize = "2.7"
+ttf-parser = "0.20"
+log = "0.4"
+rstar = "0.9"
+
+web-sys = { version = "0.3", features = [ "console", "Window", "Document", "HtmlCanvasElement", "CanvasRenderingContext2d", "Element", "Performance" ], optional = true }
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"
+
+[profile.release]
+opt-level = "s"

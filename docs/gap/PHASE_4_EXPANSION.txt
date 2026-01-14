@@ -1,0 +1,136 @@
+OMNIOS GAP REMEDIATION - PHASE 4: EXPANSION & POLISH
+======================================================
+
+OBJECTIVE
+---------
+This phase prepares the application for global scale, ensuring it can be deployed, tested, and used by non-English speakers. It covers the operational excellence "nice to haves" that become "must haves" at scale.
+
+ESTIMATED EFFORT: 100 - 150 Hours
+
+BATCH 4.1: DEPLOYMENT PIPELINE
+------------------------------
+
+### 4.1.1. Real Deployment Services
+**Current Status:** "Netlify integration not yet implemented".
+**Target Implementation:**
+- [ ] **Netlify Integration**:
+    - [ ] Authenticate via OAuth.
+    - [ ] POST to `/sites`.
+    - [ ] ZIP upload deploy.
+- [ ] **Vercel Integration** (Alternative):
+    - [ ] Vercel REST API integration.
+- [ ] **Local Docker Export**:
+    - [ ] Generate `Dockerfile` for the user's project.
+    - [ ] "Eject" strategy for users who want to self-host.
+
+### 4.1.2. CI/CD for User Projects
+**Current Status:** "No git integration".
+**Target Implementation:**
+- [ ] **GitHub Sync**:
+    - [ ] Create repository for user.
+    - [ ] Commit & Push generated code on "Save".
+    - [ ] Trigger Vercel/Netlify builds via Git hooks (better than ZIP upload).
+
+BATCH 4.2: TESTING SUITE
+------------------------
+
+### 4.2.1. End-to-End (E2E) Testing
+**Current Status:** "No E2E tests".
+**Target Implementation:**
+- [ ] Setup **Playwright**.
+- [ ] Critical Flows to Test:
+    - [ ] Signup -> Create Project -> Drag Button -> Save -> Logout.
+    - [ ] Stripe Checkout flow (using test card).
+    - [ ] Plugin installation flow.
+- [ ] Visual Regression Testing:
+    - [ ] Snapshot critical UI areas to catch CSS breakages.
+
+### 4.2.2. Integration Tests
+**Current Status:** "No API tests".
+**Target Implementation:**
+- [ ] Setup `supertest` for API route testing.
+- [ ] Test complex interactions:
+    - [ ] "If I delete a plugin, does it remove from `marketplace_installations`?"
+    - [ ] "If subscription fails, does simple-poll allow access?"
+
+BATCH 4.3: PERFORMANCE OPTIMIZATION
+-----------------------------------
+
+### 4.3.1. Bundle Analysis & Diet
+**Current Status:** "No bundle size monitoring".
+**Target Implementation:**
+- [ ] Integrate `@next/bundle-analyzer`.
+- [ ] Implementation of Code Splitting (Lazy loading plugins).
+- [ ] Dynamic Imports for heavy libraries (Three.js, Rapier).
+- [ ] Tree-shaking verification.
+
+### 4.3.2. Performance Monitoring
+**Current Status:** "No performance metrics collection".
+**Target Implementation:**
+- [ ] Integrate **Vercel Analytics** or **Google Analytics 4**.
+- [ ] Custom Telemetry:
+    - [ ] "Time to Interactive" (TTI) for the Editor.
+    - [ ] "Frame Drop" tracking during drag operations.
+
+BATCH 4.4: INTERNATIONALIZATION (I18N)
+--------------------------------------
+
+### 4.4.1. Translation Infrastructure
+**Current Status:** "Basic translation structure... No pluralization".
+**Target Implementation:**
+- [ ] Migrate to `react-i18next` or `next-intl`.
+- [ ] Externalize ALL strings into `.json` files (en-US, es-ES, fr-FR, etc.).
+- [ ] Implement Date/Currency formatters (`Intl.NumberFormat`).
+
+### 4.4.2. RTL Support
+**Current Status:** "No RTL full support".
+**Target Implementation:**
+- [ ] Add `dir="rtl"` support to Canvas.
+- [ ] CSS Logic Flow (margin-left becomes margin-right).
+- [ ] Test with Arabic/Hebrew layouts.
+
+BATCH 4.5: DOCUMENTATION
+------------------------
+
+### 4.5.1. Developer & API Docs
+**Current Status:** "No API documentation".
+**Target Implementation:**
+- [ ] Setup **Mintlify** or **Docusaurus**.
+- [ ] Auto-generate API docs from Zod schemas/OpenAPI spec.
+- [ ] Write "Plugin Authoring Guide".
+
+### 4.5.2. User Guides
+**Target Implementation:**
+- [ ] Create "Academy" section.
+- [ ] Video tutorials for complex features (Physics, AI).
+- [ ] Interactive "Tour" within the editor (checking off tasks).
+
+BATCH 4.6: ACCESSIBILITY & INCLUSIVITY
+--------------------------------------
+
+### 4.6.1. The A11y Tree
+**Current Status:** "Basic ARIA tree".
+**Target Implementation:**
+- [ ] **Automated AXE Testing**: Integrate `axe-core` into the Editor.
+- [ ] **Screen Reader Simulator**: Visual overlay showing what a screen reader would say.
+- [ ] **Focus Management**: Ensure keyboard users can navigate the canvas (Arrow keys to move selection).
+- [ ] **Contrast Checker**: Real-time warning if text color is too similar to background.
+
+BATCH 4.7: SEO INTELLIGENCE
+---------------------------
+
+### 4.7.1. SEO Dashboard & Audit
+**Current Status:** "Basic meta tag editing... No actual SEO analysis".
+**Target Implementation:**
+- [ ] Integrate **Lighthouse CI** logic into the Editor.
+- [ ] "One-Click Audit": Report on Accessibility, Performance, and SEO score.
+- [ ] Auto-generate `sitemap.xml` and `robots.txt` on deploy.
+- [ ] JSON-LD Structured Data generator for common page types.
+
+DELIVERABLES FOR PHASE 4
+------------------------
+1. One-click deploy to Netlify/Vercel.
+2. Robust automated testing pipeline to prevent regressions.
+3. Fast, optimized bundle loading < 2s.
+4. Interface available in major global languages.
+5. Complete documentation for users and developers.
